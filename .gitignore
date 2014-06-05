@@ -17,3 +17,6 @@
 
 # Ignore the datbase configuration files
 /config/database.yml
+
+#Ignoring the uploaded files
+/public/uploads/
