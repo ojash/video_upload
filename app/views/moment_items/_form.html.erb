@@ -1,0 +1,29 @@
+<%= form_for @moment_item, :html => {:multipart => true} do |f| %>
+  <% if @moment_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@moment_item.errors.count, "error") %> prohibited this moment_item from being saved:</h2>
+
+      <ul>
+      <% @moment_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :video %><br>
+    <%= f.file_field :video %>
+  </div>
+  <div class="field">
+    <%= f.label :audio %><br>
+    <%= f.file_field :audio %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

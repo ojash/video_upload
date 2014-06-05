@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @moment_item.title %>
+</p>
+
+<p>
+  <strong>Video:</strong>
+  <%= @moment_item.video %>
+</p>
+
+<p>
+  <strong>Audio:</strong>
+  <%= @moment_item.audio %>
+</p>
+
+<%= link_to 'Edit', edit_moment_item_path(@moment_item) %> |
+<%= link_to 'Back', moment_items_path %>
