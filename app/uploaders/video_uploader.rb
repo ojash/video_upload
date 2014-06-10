@@ -17,8 +17,7 @@ class VideoUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  process encode_video: [:mp4,:custom => '-qscale 1 -acodec libmp3lame' ]
-
+  process encode_video: [:mp4,:custom => '-acodec copy -vcodec copy' ]
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
   #   # For Rails 3.1+ asset pipeline compatibility:
@@ -50,5 +49,19 @@ class VideoUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  version :p480 do
+    process encode_video: [:mp4,:custom => '-vcodec libx264 -vf scale="\'ceil(iw/ih*480/2)\'*2:480" -acodec copy' ]
+    def full_filename(for_file)
+      "#{File.basename(for_file, File.extname(for_file))}_480p.mp4"
+    end
+  end
+ 
+  version :p720 do
+    process encode_video: [:mp4,:custom => '-vcodec libx264 -vf scale="\'ceil(iw/ih*720/2)\'*2:720" -acodec copy' ]
+    def full_filename(for_file)
+      "#{File.basename(for_file, File.extname(for_file))}_720p.mp4"
+    end
+  end
 
 end
