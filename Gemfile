@@ -39,6 +39,8 @@ gem 'carrierwave'
 gem 'carrierwave-video'
 gem 'carrierwave-video-thumbnailer'
 gem 'streamio-ffmpeg'
+gem "figaro"
+gem "fog", "~> 1.3.1"
 gem 'pry-rails', group: :development
 
 # Use ActiveModel has_secure_password
