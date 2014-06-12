@@ -17,7 +17,7 @@ class VideoUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  # process encode_video: [:mp4,:custom => '-acodec copy -vcodec copy' ]
+  process encode_video: [:mp4,:custom => '-acodec copy -vcodec copy' ]
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
   #   # For Rails 3.1+ asset pipeline compatibility:
@@ -50,28 +50,28 @@ class VideoUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
-  # version :p480 do
-  #   process encode_video: [:mp4,:custom => '-vcodec libx264 -vf scale="\'ceil(iw/ih*480/2)\'*2:480" -acodec copy' ]
-  #   def full_filename(for_file)
-  #     "#{File.basename(for_file, File.extname(for_file))}_480p.mp4"
-  #   end
-  # end
+  version :p480 do
+    process encode_video: [:mp4,:custom => '-vcodec libx264 -vf scale="\'ceil(iw/ih*480/2)\'*2:480" -acodec copy' ]
+    def full_filename(for_file)
+      "#{File.basename(for_file, File.extname(for_file))}_480p.mp4"
+    end
+  end
  
-  # version :p720 do
-  #   process encode_video: [:mp4,:custom => '-vcodec libx264 -vf scale="\'ceil(iw/ih*720/2)\'*2:720" -acodec copy' ]
-  #   def full_filename(for_file)
-  #     "#{File.basename(for_file, File.extname(for_file))}_720p.mp4"
-  #   end
+  version :p720 do
+    process encode_video: [:mp4,:custom => '-vcodec libx264 -vf scale="\'ceil(iw/ih*720/2)\'*2:720" -acodec copy' ]
+    def full_filename(for_file)
+      "#{File.basename(for_file, File.extname(for_file))}_720p.mp4"
+    end
+  end
+
+  # process encode_video: [:mp4]
+
+  # version :standard do
+  #   process encode_video: [ :mp4, { resolution: "1280x720" }, { preserve_aspect_ratio: :height } ]
   # end
 
-  process encode_video: [:mp4]
-
-  version :standard do
-    process encode_video: [ :mp4, { resolution: "1280x720" }, { preserve_aspect_ratio: :height } ]
-  end
-
-  version :low do
-    process encode_video: [ :mp4, {resolution: "640x480"}, {preserve_aspect_ratio: :height} ]
-  end
+  # version :low do
+  #   process encode_video: [ :mp4, {resolution: "640x480"}, {preserve_aspect_ratio: :height} ]
+  # end
 
 end
