@@ -3,6 +3,7 @@
 class VideoUploader < CarrierWave::Uploader::Base
 
   include CarrierWave::Video
+  include CarrierWave::Video::Thumbnailer
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -62,6 +63,17 @@ class VideoUploader < CarrierWave::Uploader::Base
     def full_filename(for_file)
       "#{File.basename(for_file, File.extname(for_file))}_720p.mp4"
     end
+  end
+
+  version :thumb do
+    process thumbnail: [{format: 'png', quality: 10, size: 192, strip: true, logger: Rails.logger}]
+    def full_filename for_file
+      png_name for_file, version_name
+    end
+  end
+
+  def png_name for_file, version_name
+    %Q{#{version_name}_#{for_file.chomp(File.extname(for_file))}.png}
   end
 
   # process encode_video: [:mp4]

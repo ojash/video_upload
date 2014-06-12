@@ -6,13 +6,20 @@
 </p>
 
 <p>
-  <strong>Video:</strong>
-  <%= @moment_item.video %>
+  <strong>Original:</strong>
+  <%=video_tag  @moment_item.video,poster: @moment_item.video.thumb, :size => "320x240", :controls => true   %>
+
+
+  <strong>720p:</strong>
+  <%=video_tag  @moment_item.video.p720,poster: @moment_item.video.thumb, :size => "320x240", :controls => true   %>
+
+  <strong>480p:</strong>
+  <%=video_tag  @moment_item.video.p480,poster: @moment_item.video.thumb, :size => "320x240", :controls => true   %>
 </p>
 
 <p>
   <strong>Audio:</strong>
-  <%= @moment_item.audio %>
+  <%=@moment_item.audio%>
 </p>
 
 <%= link_to 'Edit', edit_moment_item_path(@moment_item) %> |
