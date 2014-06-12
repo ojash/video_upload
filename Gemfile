@@ -37,6 +37,7 @@ end
 #customized gem list
 gem 'carrierwave'
 gem 'carrierwave-video'
+gem 'carrierwave-video-thumbnailer'
 gem 'streamio-ffmpeg'
 gem 'pry-rails', group: :development
 
